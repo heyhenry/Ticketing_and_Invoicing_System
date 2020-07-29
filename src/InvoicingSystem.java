@@ -25,7 +25,11 @@ public class InvoicingSystem {
         int startSector;
         int endSector;
         int sectorsTravelled;
-        double tripCharge;
+        double tripFare;
+        String bookingType;
+        double surcharges = 0;
+        double adjustedTripFare ;
+        double sectorRate = 0;
 
 //        //TODO add formatting at a later date
 //        // regexes
@@ -86,9 +90,60 @@ public class InvoicingSystem {
         System.out.print("Enter end sector (1 - 10): ");
         endSector = sc.nextInt();
 
+        sc.nextLine();
+        System.out.print("Enter Booking (S, RS or FC): ");
+        bookingType = sc.nextLine();
+        System.out.println(bookingType);
+
         sectorsTravelled = (Math.abs(endSector - startSector) + 1);
 
-        tripCharge = sectorsTravelled * 2.00;
+        if(sectorsTravelled <= 2) {
+
+            sectorRate = 2.50;
+
+        } else if(sectorsTravelled >= 3 && sectorsTravelled <= 4) {
+
+            sectorRate = 2.00;
+
+        } else if (sectorsTravelled >= 5 && sectorsTravelled <= 7) {
+
+            sectorRate = 1.90;
+
+        } else if(sectorsTravelled >= 8 && sectorsTravelled <= 10) {
+
+            sectorRate = 1.80;
+
+        }
+
+        tripFare = sectorsTravelled * sectorRate;
+
+        if(bookingType.equalsIgnoreCase("RS")) {
+
+            if(2.00 < tripFare * 20 * 0.01) {
+
+                surcharges = tripFare * 20 * 0.01;
+
+            } else {
+
+                surcharges = 2.00;
+
+            }
+
+        } else if (bookingType.equalsIgnoreCase("FC")) {
+
+            if(4.00 < tripFare / 2) {
+
+                surcharges = tripFare / 2;
+
+            } else {
+
+                surcharges = 4.00;
+
+            }
+
+        }
+
+        adjustedTripFare = tripFare + surcharges;
 
         System.out.println("\nCustomer Details: \n");
 
@@ -106,7 +161,9 @@ public class InvoicingSystem {
 
         System.out.printf("%-20s%50s\n", "Date:", tripDate);
         System.out.printf("%-20s%50s\n", "Sectors Travelled:", sectorsTravelled);
-        System.out.printf("%-20s%46s%.2f\n", "Basic Trip Fare:", "$", tripCharge);
+        System.out.printf("%-20s%46s%.2f\n", "Basic Trip Fare:", "$", tripFare);
+        System.out.printf("%-20s%46s%.2f\n", "Surcharges", "$", surcharges);
+        System.out.printf("%-20s%46s%.2f\n", "Adjusted Trip Fare: ", "$", adjustedTripFare);
 
 
     }
