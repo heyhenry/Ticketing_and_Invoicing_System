@@ -71,23 +71,23 @@ public class InvoicingSystem {
 
         tripCharge = sectorsTravelled * 2.00;
 
-        System.out.println("Customer Details: \n");
+        System.out.println("\nCustomer Details: \n");
 
-        System.out.printf("Name: %50s%n", name);
-        System.out.printf("Email Address: %50s%n", email);
-        System.out.printf("Mobile Phone Number: %50s%n", mobile);
-        System.out.printf("Home Address: %50s%n", home);
+        System.out.printf("%-40s%s\n", "Name:", name);
+        System.out.printf("%-40s%s\n", "Email Address:", email);
+        System.out.printf("%-40s%s\n", "Mobile Phone Number:", mobile);
+        System.out.printf("%-40s%s\n", "Home Address:", home);
 
-        System.out.println("Card Details: \n");
+        System.out.println("\nCard Details: \n");
 
-        System.out.printf("Credit Card No: %50s%n", creditCardNo);
-        System.out.printf("Expiry Date: %50s%n", cardExpiryDate);
+        System.out.printf("%-40s%s\n", "Credit Card No:", creditCardNo);
+        System.out.printf("%-40s%s\n", "Expiry Date:", cardExpiryDate);
 
-        System.out.println("Trip Details: \n");
+        System.out.println("\nTrip Details: \n");
 
-        System.out.printf("Date: %50s%n", tripDate);
-        System.out.printf("Sectors Travelled: %50d%n", sectorsTravelled);
-        System.out.printf("Basic Trip Fare: %50.2f%n", tripCharge);
+        System.out.printf("%-40s%s\n", "Date:", tripDate);
+        System.out.printf("%-40s%s\n", "Sectors Travelled:", sectorsTravelled);
+        System.out.printf("%-39s%s%.2f\n", "Basic Trip Fare:", "$", tripCharge);
 
 
     }
