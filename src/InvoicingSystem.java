@@ -24,6 +24,8 @@ public class InvoicingSystem {
         String tripDate;
         int startSector;
         int endSector;
+        int sectorsTravelled;
+        double tripCharge;
 
         System.out.println("\n*** Regional Passenger Train Invoicing System ***\n");
 
@@ -57,7 +59,7 @@ public class InvoicingSystem {
 
         System.out.print("Enter Trip Date: ");
         tripDate = sc.nextLine();
-
+        sc.nextLine();
 
         System.out.print("Enter start sector (1 - 10): ");
         startSector = sc.nextInt();
@@ -65,6 +67,27 @@ public class InvoicingSystem {
         System.out.print("Enter end sector (1 - 10): ");
         endSector = sc.nextInt();
 
+        sectorsTravelled = (Math.abs(endSector - startSector) + 1);
+
+        tripCharge = sectorsTravelled * 2.00;
+
+        System.out.println("Customer Details: \n");
+
+        System.out.printf("Name: %50s%n", name);
+        System.out.printf("Email Address: %50s%n", email);
+        System.out.printf("Mobile Phone Number: %50s%n", mobile);
+        System.out.printf("Home Address: %50s%n", home);
+
+        System.out.println("Card Details: \n");
+
+        System.out.printf("Credit Card No: %50s%n", creditCardNo);
+        System.out.printf("Expiry Date: %50s%n", cardExpiryDate);
+
+        System.out.println("Trip Details: \n");
+
+        System.out.printf("Date: %50s%n", tripDate);
+        System.out.printf("Sectors Travelled: %50d%n", sectorsTravelled);
+        System.out.printf("Basic Trip Fare: %50.2f%n", tripCharge);
 
 
     }
