@@ -27,16 +27,34 @@ public class InvoicingSystem {
         int sectorsTravelled;
         double tripCharge;
 
+        // regexes
+        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String accountRegex = "^[0-9]{2}+\\s+[0-9]{4}$";
+
         System.out.println("\n*** Regional Passenger Train Invoicing System ***\n");
 
         System.out.print("Enter Account Number: ");
         accountNumber = sc.nextLine();
+
+        while(!accountNumber.matches(accountRegex)) {
+
+            System.out.println("User input format incorrect! Try again.");
+            accountNumber = sc.nextLine();
+
+        }
 
         System.out.print("Enter Customer Name: ");
         name = sc.nextLine();
 
         System.out.print("Enter Customer Email Address: ");
         email = sc.nextLine();
+
+        while(!email.matches(emailRegex)) {
+
+            System.out.println("Incorrect format! Try again");
+            email = sc.nextLine();
+
+        }
 
         System.out.print("Enter customer Mobile Phone No: ");
         mobile = sc.nextLine();
