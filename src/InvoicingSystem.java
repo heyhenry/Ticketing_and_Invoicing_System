@@ -36,12 +36,15 @@ public class InvoicingSystem {
         double sectorRate = 0;
         char choice;
         String trip;
+        double tripFareTotal = 0;
 
         // kiosk related
         String description;
-        double kioskPrice = 0;
+        double kioskPrice;
         String kiosk;
         double kioskPurchaseTotal = 0;
+
+        double finalInvoiceCharge;
 
 //        //TODO add formatting at a later date
 //        // regexes
@@ -183,6 +186,7 @@ public class InvoicingSystem {
                     trip = String.format("%s%s%s%s%s%d%s%.2f%s%.2f%s%.2f","- ", tripDate, " ", bookingType, " - ", sectorsTravelled, " sectors : fare: $", tripFare,
                             ", surcharge: $", surcharges, ", total: $", adjustedTripFare);
 
+                    tripFareTotal = tripFareTotal + adjustedTripFare;
                     tripList.add(trip);
 
                     System.out.println("\nAdding Trip...");
@@ -202,6 +206,7 @@ public class InvoicingSystem {
 
                     kiosk = String.format("%s%s%s%s%s%.2f", "- ", tripDate, " - ", description, " : $", kioskPrice);
 
+                    kioskPurchaseTotal = kioskPurchaseTotal + kioskPrice;
                     kioskEntry.add(kiosk);
 
                     System.out.println("Recording Kiosk Purchase...");
@@ -247,16 +252,21 @@ public class InvoicingSystem {
 
         }
 
+        System.out.printf("\n%s%.2f\n", "Trip Fare Total: $", tripFareTotal);
+
         System.out.println("\nKiosk Purchases: \n");
 
         for(String k : kioskEntry) {
 
             System.out.println(k);
-            kioskPurchaseTotal = kioskPurchaseTotal + kioskPrice;
 
         }
 
-        System.out.println("Kiosk Total Purchase: " + kioskPurchaseTotal);
+        System.out.printf("\n%s%.2f\n", "Kiosk Total Purchase: $", kioskPurchaseTotal);
+
+        finalInvoiceCharge = tripFareTotal + kioskPurchaseTotal;
+
+        System.out.printf("\n%s%.2f\n", "Final Invoice Total: $", finalInvoiceCharge);
 
     }
 
