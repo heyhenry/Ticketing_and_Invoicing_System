@@ -252,6 +252,7 @@ public class InvoicingSystem {
         for(String k : kioskEntry) {
 
             System.out.println(k);
+            kioskPurchaseTotal = kioskPurchaseTotal + kioskPrice;
 
         }
 
