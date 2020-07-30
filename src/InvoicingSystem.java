@@ -34,8 +34,6 @@ public class InvoicingSystem {
         double adjustedTripFare = 0;
         double sectorRate = 0;
         char choice;
-        String trip = String.format("- ", tripDate, bookingType, "- ", sectorsTravelled, " sectors : fare: $", tripFare,
-                ", surcharge: $", surcharges, ", total: $", adjustedTripFare);
 
 //        //TODO add formatting at a later date
 //        // regexes
@@ -139,6 +137,8 @@ public class InvoicingSystem {
 
                     if(bookingType.equalsIgnoreCase("RS")) {
 
+                        bookingType = "Reserved Seat";
+
                         if(2.00 < tripFare * 20 * 0.01) {
 
                             surcharges = tripFare * 20 * 0.01;
@@ -151,6 +151,8 @@ public class InvoicingSystem {
 
                     } else if (bookingType.equalsIgnoreCase("FC")) {
 
+                        bookingType = "First Class";
+
                         if(4.00 < tripFare / 2) {
 
                             surcharges = tripFare / 2;
@@ -160,6 +162,10 @@ public class InvoicingSystem {
                             surcharges = 4.00;
 
                         }
+
+                    } else if (bookingType.equalsIgnoreCase("S")) {
+
+                        bookingType = "Standard";
 
                     }
 
@@ -200,7 +206,10 @@ public class InvoicingSystem {
 
         System.out.println("\nTrip Details: \n");
 
-//        System.out.println(trip);
+        String trip = String.format("%s%s%s%s%s%d%s%.2f%s%.2f%s%.2f","- ", tripDate, " ", bookingType, " - ", sectorsTravelled, " sectors : fare: $", tripFare,
+                ", surcharge: $", surcharges, ", total: $", adjustedTripFare);
+
+        System.out.println(trip);
 
         System.out.printf("%-20s%50s\n", "Date:", tripDate);
         System.out.printf("%-20s%50s\n", "Sectors Travelled:", sectorsTravelled);
