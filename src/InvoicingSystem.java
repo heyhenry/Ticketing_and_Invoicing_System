@@ -8,6 +8,7 @@ public class InvoicingSystem {
         Scanner sc = new Scanner(System.in);
 
         ArrayList<String> tripList = new ArrayList<>();
+        ArrayList<String> kioskEntry = new ArrayList<>();
 
         // account related
         String accountNumber;
@@ -23,7 +24,7 @@ public class InvoicingSystem {
         String cardExpiryDate;
         int securityCode;
 
-        // sector related
+        // trip related
         String tripDate;
         int startSector;
         int endSector;
@@ -35,6 +36,12 @@ public class InvoicingSystem {
         double sectorRate = 0;
         char choice;
         String trip;
+
+        // kiosk related
+        String description;
+        double kioskPrice = 0;
+        String kiosk;
+        double kioskPurchaseTotal = 0;
 
 //        //TODO add formatting at a later date
 //        // regexes
@@ -88,7 +95,8 @@ public class InvoicingSystem {
 
         do {
 
-            System.out.println("*** Trip / Kiosk Purchase Recording Menu ***");
+            System.out.println("\n Regional Passenger Train Data Entry Menu \n");
+            System.out.println("--------------------------------------------------");
             System.out.println("A - Add Trip");
             System.out.println("B - Record Kiosk Purchase");
             System.out.println("C - Return to Menu");
@@ -182,6 +190,20 @@ public class InvoicingSystem {
 
                 case 'B' :
 
+                    System.out.print("Enter Trip Date: ");
+                    tripDate = sc.nextLine();
+
+                    System.out.print("Enter Description: ");
+                    description = sc.nextLine();
+
+                    System.out.print("Cost of Kiosk Purchase: ");
+                    kioskPrice = sc.nextDouble();
+                    sc.nextLine();
+
+                    kiosk = String.format("%s%s%s%s%s%.2f", "- ", tripDate, " - ", description, " : $", kioskPrice);
+
+                    kioskEntry.add(kiosk);
+
                     System.out.println("Recording Kiosk Purchase...");
                     break;
 
@@ -193,6 +215,12 @@ public class InvoicingSystem {
                 case 'X' :
 
                     System.out.println("Exiting menu....");
+                    break;
+
+                default :
+
+                    System.out.println("Invalid input! Returning to menu...");
+                    break;
 
             }
 
@@ -218,6 +246,16 @@ public class InvoicingSystem {
             System.out.println(t);
 
         }
+
+        System.out.println("\nKiosk Purchases: \n");
+
+        for(String k : kioskEntry) {
+
+            System.out.println(k);
+
+        }
+
+        System.out.println("Kiosk Total Purchase: " + kioskPurchaseTotal);
 
     }
 
