@@ -24,16 +24,17 @@ public class InvoicingSystem {
         int securityCode;
 
         // sector related
-        String tripDate = "";
+        String tripDate;
         int startSector;
         int endSector;
-        int sectorsTravelled = 0;
-        double tripFare = 0;
-        String bookingType = "";
+        int sectorsTravelled;
+        double tripFare;
+        String bookingType;
         double surcharges = 0;
-        double adjustedTripFare = 0;
+        double adjustedTripFare;
         double sectorRate = 0;
         char choice;
+        String trip;
 
 //        //TODO add formatting at a later date
 //        // regexes
@@ -170,6 +171,12 @@ public class InvoicingSystem {
                     }
 
                     adjustedTripFare = tripFare + surcharges;
+
+                    trip = String.format("%s%s%s%s%s%d%s%.2f%s%.2f%s%.2f","- ", tripDate, " ", bookingType, " - ", sectorsTravelled, " sectors : fare: $", tripFare,
+                            ", surcharge: $", surcharges, ", total: $", adjustedTripFare);
+
+                    tripList.add(trip);
+
                     System.out.println("\nAdding Trip...");
                     break;
 
@@ -206,17 +213,11 @@ public class InvoicingSystem {
 
         System.out.println("\nTrip Details: \n");
 
-        String trip = String.format("%s%s%s%s%s%d%s%.2f%s%.2f%s%.2f","- ", tripDate, " ", bookingType, " - ", sectorsTravelled, " sectors : fare: $", tripFare,
-                ", surcharge: $", surcharges, ", total: $", adjustedTripFare);
+        for(String t : tripList) {
 
-        System.out.println(trip);
+            System.out.println(t);
 
-        System.out.printf("%-20s%50s\n", "Date:", tripDate);
-        System.out.printf("%-20s%50s\n", "Sectors Travelled:", sectorsTravelled);
-        System.out.printf("%-20s%46s%.2f\n", "Basic Trip Fare:", "$", tripFare);
-        System.out.printf("%-20s%46s%.2f\n", "Surcharges", "$", surcharges);
-        System.out.printf("%-20s%46s%.2f\n", "Adjusted Trip Fare: ", "$", adjustedTripFare);
-
+        }
 
     }
 
