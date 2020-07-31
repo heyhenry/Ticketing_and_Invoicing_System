@@ -22,7 +22,7 @@ public class InvoicingSystem {
         // card related
         String creditCardNo;
         String cardExpiryDate;
-        int securityCode;
+        String securityCode;
 
         // trip related
         String tripDate;
@@ -46,22 +46,25 @@ public class InvoicingSystem {
 
         double finalInvoiceCharge;
 
-//        //TODO add formatting at a later date
-//        // regexes
-//        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
-//        String accountRegex = "^[0-9]{2}+\\s+[0-9]{4}$";
+        // regexes
+        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String accountRegex = "^[0-9]{15}$";
+        String mobileRegex = "^[0-9]{10}$";
+        String creditCardNoRegex = "^[0-9]{16}$";
+        String cardExpiryDateRegex = "^[0-9]{6}$";
+        String securityCodeRegex = "^[0-9]{3}$";
 
         System.out.println("\n*** Regional Passenger Train Invoicing System ***\n");
 
         System.out.print("Enter Account Number: ");
         accountNumber = sc.nextLine();
 
-//        while(!accountNumber.matches(accountRegex)) {
-//
-//            System.out.println("User input format incorrect! Try again.");
-//            accountNumber = sc.nextLine();
-//
-//        }
+        while(!accountNumber.matches(accountRegex)) {
+
+            System.out.println("Needs to be 15 digits! Try again.");
+            accountNumber = sc.nextLine();
+
+        }
 
         System.out.print("Enter Customer Name: ");
         name = sc.nextLine();
@@ -69,15 +72,23 @@ public class InvoicingSystem {
         System.out.print("Enter Customer Email Address: ");
         email = sc.nextLine();
 
-//        while(!email.matches(emailRegex)) {
-//
-//            System.out.println("Incorrect format! Try again");
-//            email = sc.nextLine();
-//
-//        }
+        while(!email.matches(emailRegex)) {
+
+            System.out.println("Incorrect format! Try again");
+            System.out.println("Ex. something@myemail.com");
+            email = sc.nextLine();
+
+        }
 
         System.out.print("Enter customer Mobile Phone No: ");
         mobile = sc.nextLine();
+
+        while(!mobile.matches(mobileRegex)) {
+
+            System.out.println("Needs to be 10 digits! Try again.");
+            mobile = sc.nextLine();
+
+        }
 
         System.out.print("Enter Customer Home Address: ");
         home = sc.nextLine();
@@ -87,25 +98,46 @@ public class InvoicingSystem {
         System.out.print("Enter Credit Card No: ");
         creditCardNo = sc.nextLine();
 
+        while(!creditCardNo.matches(creditCardNoRegex)) {
+
+            System.out.println("Needs to be 16 digits! Try again.");
+            creditCardNo = sc.nextLine();
+
+        }
+
         System.out.print("Enter Expiry Date: ");
         cardExpiryDate = sc.nextLine();
 
+        while(!cardExpiryDate.matches(cardExpiryDateRegex)) {
+
+            System.out.println("Needs to be 6 digits! Try again.");
+            System.out.println("Ex. dd/yyyy");
+            cardExpiryDate = sc.nextLine();
+
+        }
+
         System.out.print("Enter Security Code: ");
-        securityCode = sc.nextInt();
+        securityCode = sc.nextLine();
+
+        while(!securityCode.matches(securityCodeRegex)) {
+
+            System.out.println("Needs to be 3 digits! Try again.");
+            securityCode = sc.nextLine();
+
+        }
 
         System.out.println();
-        sc.nextLine();
 
         do {
 
-            System.out.println("\n Regional Passenger Train Data Entry Menu \n");
+            System.out.println("Regional Passenger Train Data Entry Menu \n");
             System.out.println("--------------------------------------------------");
             System.out.println("A - Add Trip");
             System.out.println("B - Record Kiosk Purchase");
             System.out.println("C - Return to Menu");
             System.out.println("X - Exit Menu");
 
-            System.out.println("Enter your selection: ");
+            System.out.println("\nEnter your selection: ");
             choice = sc.nextLine().charAt(0);
 
             switch(Character.toUpperCase(choice)) {
@@ -118,12 +150,35 @@ public class InvoicingSystem {
                     System.out.print("Enter start sector (1 - 10): ");
                     startSector = sc.nextInt();
 
+                    while(startSector > 10 || startSector < 1) {
+
+                        System.out.println("It needs to be a number between 1 - 10!");
+                        startSector = sc.nextInt();
+
+                    }
+
                     System.out.print("Enter end sector (1 - 10): ");
                     endSector = sc.nextInt();
+
+                    while(endSector > 10 || endSector < 1) {
+
+                        System.out.println("It needs to be a number between 1 - 10");
+                        endSector = sc.nextInt();
+
+                    }
+
 
                     sc.nextLine();
                     System.out.print("Enter Booking (S, RS or FC): ");
                     bookingType = sc.nextLine();
+
+                    while(!bookingType.matches("S") && !bookingType.matches("RS") && !bookingType.matches("FC")
+                     && !bookingType.matches("s") && !bookingType.matches("rs") && !bookingType.matches("fc")) {
+
+                        System.out.println("It needs to be (S, RS, FC)! Try again.");
+                        bookingType = sc.nextLine();
+
+                    }
 
                     sectorsTravelled = (Math.abs(endSector - startSector) + 1);
 
